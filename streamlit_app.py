@@ -1,16 +1,13 @@
 import pickle
-
 import numpy as np
 import pandas as pd
 import streamlit as st
 
-title = '💵 TebakGaji'
-subtitle = 'Predict salary for any job with machine learning'
-footer = '''❤ Visit [repository](https://github.com/hyperforest/tebakgaji)
+title = 'Prediksi Gaji Dengan Algoritma CatBoost 😸'
+subtitle = 'Prediksi gaji pekerjaan apa saja dengan Machine Learning'
+footer = 'Made With ❤ By Kelompok 1 '
 
-Data courtesy of [PredictSalary](https://predictsalary.com)
-'''
-company_placeholder = 'Select company'
+company_placeholder = 'Pilih Perusahaan'
 
 COMPANIES = ['Gojek', 'Shopee', 'Tiket.com', 'Tokopedia', 'Traveloka',
              'Bukalapak', 'Other']
@@ -35,19 +32,19 @@ def predict(data: pd.DataFrame):
 
 
 def main():
-    st.set_page_config(layout="centered", page_icon='💵',
-                       page_title='TebakGaji')
+    st.set_page_config(layout="centered", page_icon='😸',
+                       page_title='Prediksi Gaji Catboost')
     st.title(title)
     st.write(subtitle)
 
-    form = st.form("Job details")
+    form = st.form("Detail Pekerjaan")
 
-    role = form.text_input('Job role')
-    company = form.selectbox('Company', [company_placeholder] + COMPANIES)
-    city = form.selectbox('Living city', CITIES)
-    other_city = form.text_input('Please type city here if you choose other')
+    role = form.text_input('Role Pekerjaan')
+    company = form.selectbox('Perusahaan', [company_placeholder] + COMPANIES)
+    city = form.selectbox('Daerah Kota', CITIES)
+    other_city = form.text_input('Ketikkan nama kota jika memilihh other')
     years_of_exp = form.number_input(
-        'Years of experience', min_value=0, max_value=30
+        'Tahun Pengalaman', min_value=0, max_value=30
     )
 
     valid_input = (
@@ -70,7 +67,7 @@ def main():
             data = pd.Series(data).to_frame(name=0).T
             prediction = predict(data)[0]
 
-            st.success('Predicted salary: IDR %.1fM' % prediction)
+            st.success('Prediksi Gaji: RP. %.1f Juta' % prediction)
 
     st.write(footer)
 
