@@ -38,7 +38,7 @@ def main():
     st.write(subtitle)
 
     if st.checkbox('Tampilkan Datasets!'):
-        data = pd.read_csv("./datasets/clean_data.csv")
+        data = pd.read_csv("./datasets/raw_data.csv")
         data
 
     form = st.form("Detail Pekerjaan")
