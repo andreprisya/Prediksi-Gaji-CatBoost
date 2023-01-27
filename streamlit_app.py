@@ -5,7 +5,8 @@ import streamlit as st
 
 title = 'Prediksi Gaji Dengan Algoritma CatBoost 😸'
 subtitle = 'Prediksi gaji pekerjaan apa saja dengan Machine Learning'
-footer = 'Made With ❤ By Kelompok 1 '
+footer = 'Made With ❤ By Kelompok 1'
+data = pd.read_csv("./datasets/clean_data.csv")
 
 company_placeholder = 'Pilih Perusahaan'
 
@@ -32,17 +33,20 @@ def predict(data: pd.DataFrame):
 
 
 def main():
-    st.set_page_config(layout="centered", page_icon='😸',
+    st.set_page_config(layout="centered", page_icon=":cat:",
                        page_title='Prediksi Gaji Catboost')
     st.title(title)
     st.write(subtitle)
+
+    if st.checkbox('Tampilkan Datasets!'):
+        data
 
     form = st.form("Detail Pekerjaan")
 
     role = form.text_input('Role Pekerjaan')
     company = form.selectbox('Perusahaan', [company_placeholder] + COMPANIES)
     city = form.selectbox('Daerah Kota', CITIES)
-    other_city = form.text_input('Ketikkan nama kota jika memilihh other')
+    other_city = form.text_input('Masukkan Nama Kota Jika Memilih other')
     years_of_exp = form.number_input(
         'Tahun Pengalaman', min_value=0, max_value=30
     )
@@ -53,7 +57,7 @@ def main():
         & ((city == 'Other') ^ (other_city == ''))
     )
 
-    submit = form.form_submit_button("Predict!")
+    submit = form.form_submit_button("Prediksi!")
     if submit:
         if not valid_input:
             st.error('Please fill the form properly')
