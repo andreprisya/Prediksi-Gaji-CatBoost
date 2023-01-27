@@ -6,7 +6,6 @@ import streamlit as st
 title = 'Prediksi Gaji Dengan Algoritma CatBoost 😸'
 subtitle = 'Prediksi gaji pekerjaan apa saja dengan Machine Learning'
 footer = 'Made With ❤ By Kelompok 1'
-data = pd.read_csv("./datasets/clean_data.csv")
 
 company_placeholder = 'Pilih Perusahaan'
 
@@ -39,6 +38,7 @@ def main():
     st.write(subtitle)
 
     if st.checkbox('Tampilkan Datasets!'):
+        data = pd.read_csv("./datasets/clean_data.csv")
         data
 
     form = st.form("Detail Pekerjaan")
